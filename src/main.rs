@@ -29,7 +29,7 @@ impl Greeter for MyGreeter {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let path = "/tmp/helloworld.sock";
+    let path = "/run/helloworld.sock";
     let _ = std::fs::remove_file(path); // Remove the old socket file if it exists
     let listener = UnixListener::bind(path)?;
 

@@ -1,0 +1,20 @@
+name: grpc-hello-world 
+version: git
+summary: An example project using gRPC and socket activation
+description: |
+  An example project using gRPC and socket activation
+
+base: core24
+confinement: devmode
+
+
+parts:
+  grpc-hello-world:
+    plugin: rust
+    source: .
+    build-packages:
+      - protobuf-compiler
+
+apps:
+  grpc-hello-world:
+    command: bin/grpc-hello-world
