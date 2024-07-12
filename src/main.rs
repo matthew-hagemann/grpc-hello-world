@@ -29,13 +29,15 @@ impl Greeter for MyGreeter {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let path = "/run/helloworld.sock";
-    let _ = std::fs::remove_file(path); // Remove the old socket file if it exists
-    let listener = UnixListener::bind(path)?;
+
+    let xdg_runtime_dir = std::env::var("XDG_RUNTIME_DIR").unwrap();
+    let path = format!("{}/helloworld.sock", xdg_runtime_dir);
+    let _ = std::fs::remove_file(&path); // Remove the old socket file if it exists
+    let listener = UnixListener::bind(&path)?;
 
     let greeter = MyGreeter::default();
 
-    println!("GreeterServer listening on {}", path);
+    println!("GreeterServer listening on {}", &path);
 
     Server::builder()
         .add_service(GreeterServer::new(greeter))

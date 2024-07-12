@@ -1,0 +1,12 @@
+[Unit]
+Description=gRPC Hello World Service
+Requires=grpc-hello-world.socket
+After=network.target
+
+[Service]
+ExecStart=$SNAP/bin/grpc-hello-world
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

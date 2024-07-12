@@ -1,0 +1,10 @@
+[Unit]
+Description=gRPC Hello World Socket
+
+[Socket]
+ListenStream=$XDG_RUNTIME_DIR/helloworld.sock
+SocketMode=0666
+
+[Install]
+WantedBy=sockets.target
+

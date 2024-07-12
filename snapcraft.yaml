@@ -18,3 +18,11 @@ parts:
 apps:
   grpc-hello-world:
     command: bin/grpc-hello-world
+    daemon: simple
+    restart-condition: always
+    sockets:
+      grpc-hello-world:
+        listen-stream: $XDG_RUNTIME_DIR/helloworld.sock
+        socket-mode: 0666
+    plugs: 
+      - network-bind # requirement of sockets
